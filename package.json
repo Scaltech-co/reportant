@@ -1,0 +1,30 @@
+{
+  "name": "reportant",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite dev",
+    "start": "vite preview",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^4.0.4",
+    "svelte": "^5.1.9",
+    "vite": "^5.4.19"
+  },
+  "dependencies": {
+    "dompurify": "^3.2.6",
+    "jszip": "^3.10.1",
+    "metro4": "^4.5.0"
+  },
+  "description": "Reportant - WordPress Bug Reporting Plugin",
+  "main": "index.js",
+  "keywords": [
+    "svelte",
+    "bug-report"
+  ],
+  "author": "Scal Technologies Ltd",
+  "license": "GPL-2.0-or-later"
+}
