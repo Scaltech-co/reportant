@@ -40,4 +40,4 @@ dist/ – generated production files
 This project is licensed under GPLv2.
 
 ## Third Party Licenses
-See NOTICES.txt
+See NOTICE.txt
