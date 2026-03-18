@@ -1,15 +1,28 @@
-This plugin uses the following third-party libraries:
+This repository incorporates material as listed below or described in the code.
 
-1. dompurify@2.4.0
+1. DOMPurify
    License: Apache-2.0
-   https://github.com/cure53/DOMPurify
+   Source: https://github.com/cure53/DOMPurify
 
-2. jszip@3.10.1
+2. JSZip
    License: MIT
-   https://github.com/Stuk/jszip
+   Source: https://github.com/Stuk/jszip
 
-3. metro4@4.5.12
+3. Metro 4
    License: MIT
-   https://github.com/olton/Metro-UI-CSS
+   Source: https://github.com/olton/Metro-UI-CSS
 
-Additional dependency details can be provided upon request.
+4. Svelte
+   License: MIT
+   Source: https://github.com/sveltejs/svelte
+
+5. Vite
+   License: MIT
+   Source: https://github.com/vitejs/vite
+
+6. @sveltejs/vite-plugin-svelte
+   License: MIT
+   Source: https://github.com/sveltejs/vite-plugin-svelte
+
+This list reflects the main third-party libraries used in the repository source and build process.
+Additional dependencies may be included as part of the development and build tooling.
