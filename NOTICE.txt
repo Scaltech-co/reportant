@@ -11,3 +11,5 @@ This plugin uses the following third-party libraries:
 3. metro4@4.5.12
    License: MIT
    https://github.com/olton/Metro-UI-CSS
+
+Additional dependency details can be provided upon request.
