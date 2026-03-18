@@ -36,15 +36,8 @@ dist/app.js
 src/ – human readable source code  
 dist/ – generated production files
 
-## Dependencies
+## License
+This project is licensed under GPLv2.
 
-This project uses the following open source libraries:
-
-- DOMPurify — Apache-2.0  
-  https://github.com/cure53/DOMPurify
-
-- JSZip — MIT  
-  https://github.com/Stuk/jszip
-
-- Metro UI CSS — MIT  
-  https://github.com/olton/Metro-UI-CSS
+## Third Party Licenses
+See NOTICES.txt
