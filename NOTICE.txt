@@ -1,0 +1,18 @@
+This plugin uses the following third-party libraries:
+
+1. dompurify@2.4.0
+   License: Apache-2.0
+   https://github.com/cure53/DOMPurify
+
+2. jszip@3.10.1
+   License: MIT
+   https://github.com/Stuk/jszip
+
+3. metro4@4.5.12
+   License: MIT
+   https://github.com/olton/Metro-UI-CSS
+
+== Development Source ==
+
+The development source code for the JavaScript assets used in this plugin is available at:
+https://github.com/Scaltech-co/reportant
