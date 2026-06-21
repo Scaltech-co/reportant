@@ -6,22 +6,12 @@ export const titleInStore = writable("");
 export const termsAgreeInStore = writable(false);
 export const videoSrcInStore = writable(undefined);
 export const videoUrlInStore = writable(undefined);
-export const envDetailsInStore = writable(undefined);
 export const isRecordingStore = writable(false);
 export const messages = writable([]);
 
-// Static function
-export function isFreeVersion() {
-  return true;
-}
-
 // Getter functions
 export function getTitle() {
-  return get(titleInStore); // get() pulls current value
-}
-
-export function getEnvDetails() {
-  return get(envDetailsInStore);
+  return get(titleInStore);
 }
 
 export function getMessages() {

@@ -4,8 +4,6 @@
    import Terms from "./report/Terms.svelte";
    import RecordBug from "./report/record/RecordBug.svelte";
    import Chat from "./report/addinfo/Chat.svelte";
-   import Form from "./report/addinfo/Form.svelte";
-   import { isFreeVersion } from "./report/store";
 
    function isAdmin() {
       return true;
@@ -33,11 +31,6 @@
 {:else}
    <div class="logo-envelope">
       <img src="images/ScalLogo.png" class="scal-logo" alt="ScalLogo" />
-      {#if isFreeVersion()}
-         <p class="version-label free">FREE</p>
-      {:else}
-         <p class="version-label pro">PRO</p>
-      {/if}
    </div>
 
    <div class="report">
@@ -53,13 +46,12 @@
                <Terms />
             </div>
          </div>
-         <Form />
       </div>
    </div>
 
    <div class="p-4">
       <p class="text-bold text-center">
-         Copyright © Scal 2025 All Rights Reserved
+         Copyright © Scal 2026 All Rights Reserved
       </p>
    </div>
 {/if}
@@ -75,18 +67,6 @@
 
 .scal-logo {
    height: 100%;
-}
-
-.version-label {
-   font-size: 1em;
-}
-
-.free {
-   color: rgb(25, 199, 25);
-}
-
-.pro {
-   color: pink;
 }
 
 .report-inner-container {
@@ -117,11 +97,7 @@
 @media(max-width:768px){
    .logo-envelope {
       height: 50px;
-      gap: 5px;           
-   }
-
-   .version-label {
-      font-size: 0.8em;   
+      gap: 5px;
    }
 
    .report-inner-container {

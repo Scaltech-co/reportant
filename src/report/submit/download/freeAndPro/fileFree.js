@@ -6,7 +6,6 @@ import {
     generateSuffix,
     returnEmailByClass,
     downloadFilesInZip,
-    getSanitizedTitle,
 } from '../../FileFunctions.js';
 import DOMPurify from 'dompurify';
 
