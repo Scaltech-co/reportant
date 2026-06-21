@@ -1,46 +1,43 @@
 import FileBase from './fileBase.js';
 import { get } from 'svelte/store';
-import { videoUrlInStore, getMessages, titleInStore} from '../.././../store.js';
-import {createConsoleLogsHtml, generatePrefix, generateSuffix, returnEmailByClass, downloadFilesInZip, getUpgradeMessage, getCustomMessage, getConsoleMessage, getEnvDetailsMessage, getSanitizedTitle } from "../../FileFunctions.js";
+import { videoUrlInStore, getMessages, titleInStore } from '../../../store.js';
+import {
+    generatePrefix,
+    generateSuffix,
+    returnEmailByClass,
+    downloadFilesInZip,
+    getSanitizedTitle,
+} from '../../FileFunctions.js';
 import DOMPurify from 'dompurify';
 
- const csrfToken = window.reportant_csrf_nonce;
-
 class FileFree extends FileBase {
-
-
     async download() {
-        const envDetailsBlob = getUpgradeMessage() + getEnvDetailsMessage();
-        const consoleLogs = createConsoleLogsHtml();
-        const debugLogMessageForFreeVersion = getUpgradeMessage() + getCustomMessage("Notice", 2) + getCustomMessage("Warning", 2);
-        const errorLogMessageForFreeVersion = getUpgradeMessage() + getCustomMessage("Warning", 3);
         const chatInStore = getMessages();
-        const prefix = generatePrefix(); 
+        const prefix = generatePrefix();
         const suffix = generateSuffix();
-        const sanitizedTitle = DOMPurify.sanitize(titleInStore.value || "")
-        const emailResponseTo = returnEmailByClass("emailResponseTo");
-
+        const sanitizedTitle = DOMPurify.sanitize(titleInStore.value || '');
+        const emailResponseTo = returnEmailByClass('emailResponseTo');
         const videoUrl = get(videoUrlInStore);
-
+        const csrfToken = window.reportant_csrf_nonce;
 
         let videoContent = null;
-        if (videoUrl) {    
-            videoContent = await fetch(videoUrl).then(res => res.blob());
+        if (videoUrl) {
+            videoContent = await fetch(videoUrl).then((res) => res.blob());
         }
 
         if (!csrfToken) {
-            alert("CSRF token is missing. Please refresh the page and try again.");
+            alert('CSRF token is missing. Please refresh the page and try again.');
             return;
         }
 
         try {
-            const response = await fetch("/wp-json/reportant/v1/download", {
-                method: "POST",
+            const response = await fetch('/wp-json/reportant/v1/download', {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-Token": csrfToken,
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': csrfToken,
                 },
-                body: JSON.stringify({ chatInStore, prefix, suffix, sanitizedTitle, emailResponseTo, debugLogMessageForFreeVersion, errorLogMessageForFreeVersion })
+                body: JSON.stringify({ chatInStore, prefix, suffix, sanitizedTitle, emailResponseTo }),
             });
 
             if (!response.ok) {
@@ -53,27 +50,29 @@ class FileFree extends FileBase {
                 const attachments = responseData.attachments;
                 const filesForZip = [];
 
-                for (const fileName in attachments) {
-                    const fileContent = attachments[fileName];
-                    const fileBlob = new Blob([fileContent], { type: "text/plain" });
-                    filesForZip.push({ content: fileBlob, fileType: fileName });
+                if (attachments.chat_messages) {
+                    filesForZip.push({
+                        content: new Blob([attachments.chat_messages], { type: 'text/html' }),
+                        fileType: 'chat_messages',
+                    });
                 }
 
-                filesForZip.push({ content: envDetailsBlob, fileType: "environment_details" });
-                filesForZip.push({ content: consoleLogs, fileType: "console_log" });
                 if (videoContent) {
-                    filesForZip.push({ content: videoContent, fileType: "video" });
+                    filesForZip.push({ content: videoContent, fileType: 'video' });
                 }
-                
+
+                if (filesForZip.length === 0) {
+                    return;
+                }
+
                 downloadFilesInZip(filesForZip, `data_for_bug_${sanitizedTitle}.zip`);
             } else {
-                console.error("Server returned an error:", responseData.error);
+                console.error('Server returned an error:', responseData.error);
             }
         } catch (error) {
-            console.error("Error:", error);
+            console.error('Error:', error);
         }
-
     }
-    }
+}
 
 export default FileFree;

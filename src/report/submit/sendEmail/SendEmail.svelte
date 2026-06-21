@@ -1,6 +1,5 @@
 <script>
   import {titleInStore,videoSrcInStore,getMessages,termsAgreeInStore,isRecordingStore} from "../../store.js";
-  import { fileContentFactory } from "./freeAndPro/fileFactory.js";
   import {generatePrefix,generateSuffix,returnEmailByClass,} from "../FileFunctions.js";
   import { updateErrorMsg, resetErrorMessage,  updateErrorMsgChat, } from "../../utils.js";
   import { questions } from "../../addinfo/questions.js";
@@ -8,8 +7,6 @@
   import DOMPurify from 'dompurify';
 
   const jq = window.jQuery;
-
-  const file = fileContentFactory();
   const csrfToken = window.reportant_csrf_nonce;
   let titleError = "",
       termsAgreeError = "";
@@ -50,7 +47,6 @@
     updateErrorMsg(".checkbox", "termsAgreeError", termsAgreeError);
     let emailToSend = returnEmailByClass("emailSendTo");
     let emailResponseTo = returnEmailByClass("emailResponseTo");
-    const htmlContent = file.createConsoleLogFiles();
 
     const formData = new FormData();
     formData.append("prefix", generatePrefix());
@@ -59,21 +55,7 @@
     formData.append("emailSendTo", emailToSend);
     formData.append("emailResponseTo", emailResponseTo);
     formData.append("videoSrcInStore", $videoSrcInStore, "video.webm");
-    formData.append("enviromentDetails", file.createEnviromentDetailsFile());
     formData.append("chatInStore", JSON.stringify(getMessages()));
-    formData.append("consolelogs", htmlContent, "consolelogs.html");
-    formData.append(
-      "consoleLogMessageForFreeVersion",
-      file.createConsoleLogMessage()
-    );
-    formData.append(
-      "errorLogMessageForFreeVersion",
-      file.createErrorLogMessage()
-    );
-    formData.append(
-      "debugLogMessageForFreeVersion",
-      file.createDebugLogMessage()
-    );
 
     fetch("/wp-json/reportant/v1/send-email", {
       method: "POST",

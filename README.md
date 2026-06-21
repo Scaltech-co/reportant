@@ -2,9 +2,10 @@
 
 This repository contains the **human-readable development source code** used to generate the production JavaScript files distributed with the Reportant WordPress plugin.
 
-The compiled production file used by the plugin is:
+The compiled production files used by the plugin are:
 
 dist/app.js
+dist/bundle.css
 
 ## Build Tools
 
@@ -27,9 +28,10 @@ npm install
 
 npm run build
 
-After running the build command, the compiled production file will be generated at:
+After running the build command, the compiled production files will be generated at:
 
 dist/app.js
+dist/bundle.css
 
 ## Source Structure
 
